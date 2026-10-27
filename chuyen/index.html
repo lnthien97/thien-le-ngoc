@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="vi" data-lang="vi"
+      data-title-vi="Chuyện — Lê Ngọc Thiên"
+      data-title-en="Stories — Thien Le Ngoc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chuyện — Lê Ngọc Thiên</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f766e'/><text x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>T</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Literata:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/main.js"></script>
+</head>
+<body data-page="stories">
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="../">thien.</a>
+    <nav class="nav">
+      <a href="../anh/"><span data-l="vi">Ảnh</span><span data-l="en">Photos</span></a>
+      <a href="./" aria-current="page"><span data-l="vi">Chuyện</span><span data-l="en">Stories</span></a>
+      <a href="../#work"><span data-l="vi">Công việc</span><span data-l="en">Work</span></a>
+      <span class="toggles">
+        <button class="btn-icon" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+        <button class="btn-icon" id="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<!-- Danh sách lấy từ stories.json; nội dung mỗi truyện là file <slug>.md -->
+<main class="container page" id="content"></main>
+
+<footer class="site-footer">
+  <div class="container">© <span id="year">2026</span> Lê Ngọc Thiên</div>
+</footer>
+
+</body>
+</html>

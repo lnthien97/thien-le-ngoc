@@ -1,50 +1,27 @@
 # thien-le-ngoc
 
-Trang cá nhân — HTML/CSS thuần, song ngữ (VI/EN), host trên GitHub Pages.
+Trang cá nhân: **Ảnh**, **Chuyện**, **Công việc**. HTML/CSS thuần, song ngữ (VI/EN), host trên GitHub Pages.
 
 ## Cấu trúc
 
 ```
-index.html            Trang chủ: giới thiệu, sở thích, blog, dự án, kinh nghiệm
-blog/index.html       Danh sách bài viết + lọc theo thẻ (?tag=...)
-blog/hello-world.html Bài viết mẫu (copy để viết bài mới)
-assets/css/style.css  Toàn bộ style (màu ở :root, có dark mode)
-assets/js/main.js     Nút chuyển ngôn ngữ + giao diện sáng/tối
-.nojekyll             Báo GitHub Pages phục vụ file nguyên trạng
+index.html               Trang chủ: giới thiệu, bộ sưu tập mới, truyện mới, công việc
+anh/index.html           Trang ảnh (danh sách bộ sưu tập, hoặc 1 bộ qua ?c=<slug>)
+anh/collections.json     Danh sách bộ sưu tập  (script tự cập nhật)
+anh/<slug>/photos.json   Danh sách ảnh của 1 bộ (script tự cập nhật)
+anh/<slug>/*.webp        Ảnh đã nén
+chuyen/index.html        Trang truyện (danh sách, hoặc 1 truyện qua ?s=<slug>)
+chuyen/stories.json      Danh sách truyện (sửa tay)
+chuyen/<slug>.md         Nội dung từng truyện
+assets/                  CSS + JS
+tools/add_photos.py      Script thêm ảnh
 ```
 
-## Chỉnh nội dung
+Trang ảnh và trang truyện đọc dữ liệu từ các file JSON nên **không cần sửa HTML** khi thêm nội dung.
 
-- Tìm `TODO` trong `index.html` để thay nội dung mẫu.
-- Song ngữ: đặt bản tiếng Việt trong phần tử `data-l="vi"`, bản tiếng Anh trong `data-l="en"`. Phần tử nào không có `data-l` thì hiện ở cả hai ngôn ngữ.
-- Ảnh đại diện: bỏ ảnh vào `assets/img/avatar.jpg` rồi thay khối `<div class="avatar">` bằng `<img class="avatar" src="assets/img/avatar.jpg" alt="">`.
-- CV: bỏ file `cv.pdf` vào thư mục gốc (hoặc xoá nút "Tải CV").
+## Ảnh — bộ sưu tập
 
-## Viết bài blog
-
-1. Copy `blog/hello-world.html` thành `blog/<slug>.html` rồi sửa nội dung và thẻ.
-2. Thêm một `<li data-tags="...">` vào đầu danh sách trong `blog/index.html`.
-3. (Tuỳ chọn) Thêm vào mục "Bài viết mới" ở `index.html`.
-
-### Thẻ (sở thích)
-
-Mỗi bài có một hoặc nhiều thẻ trong `data-tags`, cách nhau bằng dấu cách, ví dụ `data-tags="photography travel"`.
-
-| Slug          | Hiển thị                |
-|---------------|-------------------------|
-| `photography` | Nhiếp ảnh / Photography |
-| `travel`      | Du lịch / Travel        |
-| `gamedev`     | Làm game / Game dev     |
-| `gaming`      | Chơi game / Gaming      |
-| `movies`      | Phim / Movies           |
-| `music`       | Âm nhạc / Music         |
-| `tech`        | Kỹ thuật / Tech         |
-
-Lọc theo thẻ bằng `blog/?tag=<slug>`. Các thẻ ở mục Sở thích trên trang chủ dẫn tới đúng link này. Thêm thẻ mới: thêm nút vào `.filters` trong `blog/index.html` (và một thẻ ở trang chủ nếu muốn).
-
-### Ảnh
-
-Chỉ commit ảnh **đã nén** vào `blog/img/`. Ảnh gốc để trong `photos-src/` (đã gitignore, không bao giờ lên GitHub).
+Mỗi bộ sưu tập là một chủ đề, ví dụ "Mây trời", "Góc cà phê"... Có thể thêm ảnh vào bất cứ lúc nào.
 
 Cài đặt một lần:
 
@@ -53,26 +30,73 @@ python3 -m venv tools/.venv
 tools/.venv/bin/pip install -r tools/requirements.txt
 ```
 
-Mỗi album / bài viết:
+Thêm ảnh (cho bộ mới hoặc bộ cũ):
 
 ```sh
-# 1. Copy ảnh gốc (JPG, HEIC từ iPhone, PNG...) vào photos-src/<slug>/
-# 2. Chạy script — nó in sẵn đoạn HTML gallery
-tools/.venv/bin/python tools/add_photos.py photos-src/<slug>
-# 3. Dán đoạn HTML vào blog/<slug>.html, điền alt cho từng ảnh
+# 1. Bỏ ảnh gốc (JPG, HEIC từ iPhone, PNG...) vào photos-src/<Tên chủ đề>/
+# 2. Chạy:
+tools/.venv/bin/python tools/add_photos.py "photos-src/<Tên chủ đề>"
+# 3. Commit thư mục anh/
 ```
 
 Script sẽ:
-- xoay ảnh đúng chiều theo EXIF,
-- **xoá toàn bộ metadata, gồm cả toạ độ GPS** nơi chụp,
-- tạo bản lớn (2000px, WebP) và bản thumbnail (800px) trong `blog/img/<slug>/`,
-- bỏ qua ảnh đã xử lý (dùng `--force` để làm lại), cảnh báo khi `blog/img/` vượt 800 MB.
+- chỉ xử lý ảnh mới, bỏ qua ảnh đã có,
+- xoay ảnh đúng chiều, **xoá toàn bộ metadata, gồm cả GPS**,
+- tạo bản lớn (2000px) và thumbnail (800px) dạng WebP,
+- sắp ảnh theo ngày chụp, mới nhất lên đầu,
+- cập nhật `anh/collections.json`: số ảnh, ngày cập nhật. Bộ vừa thêm ảnh sẽ nổi lên đầu.
 
-Tuỳ chọn: `--size 1600`, `--thumb 600`, `--quality 75` để file nhỏ hơn.
+Lần đầu tạo bộ mới, tên bộ lấy theo tên thư mục. Sửa tiêu đề và mô tả song ngữ trong `anh/collections.json`:
 
-Trong bài, bấm vào ảnh sẽ mở lightbox (←/→ để chuyển, Esc để đóng). Thêm class `wide` vào `.gallery` để mỗi ảnh chiếm trọn một dòng, giữ nguyên tỉ lệ.
+```json
+{
+  "slug": "may-troi",
+  "title": { "vi": "Mây trời", "en": "Skies" },
+  "description": { "vi": "Những bầu trời mình gặp trên đường.", "en": "Skies I've met along the way." },
+  "cover": "img-0012-thumb.webp",
+  ...
+}
+```
 
-**Giới hạn của GitHub:** site Pages tối đa 1 GB. Git giữ lại mọi file đã từng commit, nên xoá ảnh sau này *không* làm repo nhỏ lại — hãy kiểm tra trước khi commit. Mỗi ảnh sau khi nén khoảng 300–600 KB, nên còn chỗ cho khoảng 1500–2500 ảnh.
+- `cover`: ảnh bìa, là tên một file `-thumb.webp` trong thư mục của bộ đó.
+- Chú thích ảnh: sửa trường `caption` trong `anh/<slug>/photos.json`, có thể là chuỗi hoặc `{ "vi": "...", "en": "..." }`.
+- Xoá ảnh: xoá 2 file `.webp` của nó rồi chạy lại script.
+
+**Giới hạn:** GitHub Pages tối đa 1 GB. Mỗi ảnh khoảng 300–600 KB, tức chứa được khoảng 1500–2500 ảnh. Git giữ mọi file đã commit, nên xoá sau này không làm repo nhỏ lại. Script cảnh báo khi `anh/` vượt 800 MB.
+
+## Chuyện
+
+1. Viết truyện vào `chuyen/<slug>.md`, ví dụ `chuyen/nguoi-gac-den.md`.
+2. Thêm vào **đầu** danh sách `chuyen/stories.json`:
+
+```json
+[
+  {
+    "slug": "nguoi-gac-den",
+    "title": "Người gác đèn",
+    "date": "2026-10-27",
+    "summary": "Một đêm bão, ngọn đèn không chịu sáng."
+  }
+]
+```
+
+`title` và `summary` có thể là chuỗi hoặc `{ "vi": "...", "en": "..." }`.
+
+Cách viết trong file `.md`:
+
+| Viết                    | Hiển thị                         |
+|-------------------------|----------------------------------|
+| dòng trống              | sang đoạn mới                    |
+| xuống dòng 1 lần        | xuống dòng trong cùng đoạn       |
+| `*nghiêng*`             | *nghiêng*                        |
+| `**đậm**`               | **đậm**                          |
+| `## Tiêu đề`            | tiêu đề chương                   |
+| `> câu trích`           | trích dẫn                        |
+| `***`                   | ngắt cảnh (* * *)                |
+
+## Công việc
+
+Sửa trực tiếp mục `#work` trong `index.html`. Repo là public, nên không ghi tên hệ thống nội bộ, khách hàng hay thông tin công ty.
 
 ## Xem trên máy
 
@@ -81,10 +105,9 @@ python3 -m http.server 8000
 # mở http://localhost:8000
 ```
 
-## Deploy lên GitHub Pages
+Phải chạy qua server. Mở file trực tiếp (`file://`) sẽ không tải được JSON.
 
-1. Push lên nhánh `main`.
-2. Trên GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a branch**, chọn `main` / `/ (root)`.
-3. Site sẽ có ở `https://lnthien97.github.io/thien-le-ngoc/`.
+## Deploy
 
-Muốn có địa chỉ `https://lnthien97.github.io/` thì đổi tên repo thành `lnthien97.github.io`. Đường dẫn trong site đều là tương đối nên chạy được ở cả hai kiểu.
+GitHub → **Settings → Pages → Deploy from a branch** → `main` / `/ (root)`.
+Site: `https://lnthien97.github.io/thien-le-ngoc/`
