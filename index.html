@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="vi" data-lang="vi"
+      data-title-vi="Lê Ngọc Thiện — Trang cá nhân"
+      data-title-en="Thien Le Ngoc — Personal site">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lê Ngọc Thiện</title>
+  <meta name="description" content="Trang cá nhân của Lê Ngọc Thiện — nhiếp ảnh, du lịch, game, phim, âm nhạc và công việc.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f766e'/><text x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>T</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/main.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="#top">thien.</a>
+    <nav class="nav">
+      <span class="nav-links">
+        <a href="#hobbies"><span data-l="vi">Sở thích</span><span data-l="en">Hobbies</span></a>
+        <a href="blog/">Blog</a>
+        <a href="#projects"><span data-l="vi">Dự án</span><span data-l="en">Projects</span></a>
+        <a href="#experience"><span data-l="vi">Kinh nghiệm</span><span data-l="en">Experience</span></a>
+      </span>
+      <span class="toggles">
+        <button class="btn-icon" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+        <button class="btn-icon" id="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main class="container" id="top">
+
+  <!-- ===== About ===== -->
+  <section class="hero" id="about">
+    <div class="hero-top">
+      <!-- TODO: replace with <img class="avatar" src="assets/img/avatar.jpg" alt=""> -->
+      <div class="avatar" aria-hidden="true">T</div>
+      <div>
+        <h1>
+          <span data-l="vi">Lê Ngọc Thiện</span>
+          <span data-l="en">Thien Le Ngoc</span>
+        </h1>
+        <!-- TODO: chỉnh lại chức danh -->
+        <p class="role">
+          <span data-l="vi">Kỹ sư Cloud / Platform</span>
+          <span data-l="en">Cloud / Platform Engineer</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- TODO: viết lại đoạn giới thiệu -->
+    <p class="lead" data-l="vi">
+      Xin chào! Ban ngày mình làm hạ tầng cloud. Ngoài giờ mình chụp ảnh, đi du lịch,
+      làm và chơi game, xem phim, nghe nhạc — và ghi lại tất cả ở đây.
+    </p>
+    <p class="lead" data-l="en">
+      Hi! By day I work on cloud infrastructure. After hours I take photos, travel,
+      make and play games, watch films and listen to music — and write about it all here.
+    </p>
+
+    <div class="links">
+      <a class="chip" href="https://github.com/lnthien97" target="_blank" rel="noopener">GitHub</a>
+      <!-- TODO: điền link thật hoặc xoá -->
+      <a class="chip" href="https://www.instagram.com/your-handle" target="_blank" rel="noopener">Instagram</a>
+      <a class="chip" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="chip" href="mailto:you@example.com">Email</a>
+    </div>
+  </section>
+
+  <!-- ===== Hobbies ===== -->
+  <section id="hobbies">
+    <div class="eyebrow"><span data-l="vi">Sở thích</span><span data-l="en">Hobbies</span></div>
+    <!-- Mỗi thẻ dẫn tới blog lọc theo tag. Slug phải khớp với data-tags trong blog/index.html. -->
+    <div class="grid grid-sm">
+      <a class="card" href="blog/?tag=photography">
+        <div class="emoji">📷</div>
+        <h3><span data-l="vi">Nhiếp ảnh</span><span data-l="en">Photography</span></h3>
+        <p data-l="vi">Ảnh đường phố, phong cảnh và những khoảnh khắc nhỏ.</p>
+        <p data-l="en">Street, landscape and small everyday moments.</p>
+      </a>
+      <a class="card" href="blog/?tag=travel">
+        <div class="emoji">✈️</div>
+        <h3><span data-l="vi">Du lịch</span><span data-l="en">Travel</span></h3>
+        <p data-l="vi">Ghi chép và ảnh từ những nơi đã đi.</p>
+        <p data-l="en">Notes and photos from places I've been.</p>
+      </a>
+      <a class="card" href="blog/?tag=gamedev">
+        <div class="emoji">🛠️</div>
+        <h3><span data-l="vi">Làm game</span><span data-l="en">Game dev</span></h3>
+        <p data-l="vi">Nhật ký phát triển các dự án game cá nhân.</p>
+        <p data-l="en">Devlogs from my personal game projects.</p>
+      </a>
+      <a class="card" href="blog/?tag=gaming">
+        <div class="emoji">🎮</div>
+        <h3><span data-l="vi">Chơi game</span><span data-l="en">Gaming</span></h3>
+        <p data-l="vi">Cảm nhận về những game đã chơi.</p>
+        <p data-l="en">Thoughts on games I've played.</p>
+      </a>
+      <a class="card" href="blog/?tag=movies">
+        <div class="emoji">🎬</div>
+        <h3><span data-l="vi">Phim</span><span data-l="en">Movies</span></h3>
+        <p data-l="vi">Review ngắn và danh sách phim yêu thích.</p>
+        <p data-l="en">Short reviews and favourite films.</p>
+      </a>
+      <a class="card" href="blog/?tag=music">
+        <div class="emoji">🎵</div>
+        <h3><span data-l="vi">Âm nhạc</span><span data-l="en">Music</span></h3>
+        <p data-l="vi">Playlist, album và nghệ sĩ đang nghe.</p>
+        <p data-l="en">Playlists, albums and artists on repeat.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Blog ===== -->
+  <section id="blog">
+    <div class="eyebrow"><span data-l="vi">Bài viết mới</span><span data-l="en">Latest posts</span></div>
+    <!-- Giữ 3–5 bài mới nhất ở đây; danh sách đầy đủ ở blog/index.html -->
+    <ul class="posts">
+      <li>
+        <div>
+          <a href="blog/hello-world.html">
+            <span data-l="vi">Xin chào — bài viết đầu tiên</span>
+            <span data-l="en">Hello — my first post</span>
+          </a>
+          <div class="post-tags">
+            <a class="tag" href="blog/?tag=tech"><span data-l="vi">Kỹ thuật</span><span data-l="en">Tech</span></a>
+          </div>
+        </div>
+        <time datetime="2026-10-27">2026-10-27</time>
+      </li>
+    </ul>
+    <a class="more" href="blog/"><span data-l="vi">Xem tất cả bài viết →</span><span data-l="en">All posts →</span></a>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section id="projects">
+    <div class="eyebrow"><span data-l="vi">Dự án</span><span data-l="en">Projects</span></div>
+    <!-- TODO: thay bằng dự án thật (công việc lẫn game cá nhân). Copy một <a class="card"> để thêm. -->
+    <div class="grid">
+      <a class="card" href="https://github.com/lnthien97" target="_blank" rel="noopener">
+        <h3><span data-l="vi">Game cá nhân</span><span data-l="en">Personal game</span></h3>
+        <p data-l="vi">Mô tả ngắn: thể loại, engine, trạng thái.</p>
+        <p data-l="en">Short description: genre, engine, status.</p>
+        <div class="tags"><span class="tag">Godot</span></div>
+      </a>
+      <a class="card" href="https://github.com/lnthien97" target="_blank" rel="noopener">
+        <h3><span data-l="vi">Dự án kỹ thuật</span><span data-l="en">Tech project</span></h3>
+        <p data-l="vi">Mô tả ngắn: dự án giải quyết vấn đề gì, vai trò của bạn.</p>
+        <p data-l="en">Short description: what problem it solves and your role.</p>
+        <div class="tags"><span class="tag">Go</span><span class="tag">K8s</span></div>
+      </a>
+      <a class="card" href="https://github.com/lnthien97/thien-le-ngoc" target="_blank" rel="noopener">
+        <h3><span data-l="vi">Trang web này</span><span data-l="en">This website</span></h3>
+        <p data-l="vi">HTML/CSS thuần, song ngữ, host trên GitHub Pages.</p>
+        <p data-l="en">Plain HTML/CSS, bilingual, hosted on GitHub Pages.</p>
+        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Experience ===== -->
+  <section id="experience">
+    <div class="eyebrow"><span data-l="vi">Kinh nghiệm</span><span data-l="en">Experience</span></div>
+    <!-- TODO: thay bằng kinh nghiệm thật. Copy một <li> để thêm mục. -->
+    <ol class="timeline">
+      <li>
+        <div class="when">2023 — <span data-l="vi">nay</span><span data-l="en">now</span></div>
+        <div>
+          <h3><span data-l="vi">Vị trí hiện tại</span><span data-l="en">Current role</span></h3>
+          <div class="org"><span data-l="vi">Tên công ty</span><span data-l="en">Company name</span></div>
+          <ul>
+            <li data-l="vi">Mô tả thành tựu / trách nhiệm chính.</li>
+            <li data-l="en">Key achievement or responsibility.</li>
+          </ul>
+          <div class="tags"><span class="tag">Kubernetes</span><span class="tag">Prometheus</span><span class="tag">Go</span></div>
+        </div>
+      </li>
+      <li>
+        <div class="when">2020 — 2023</div>
+        <div>
+          <h3><span data-l="vi">Vị trí trước</span><span data-l="en">Previous role</span></h3>
+          <div class="org"><span data-l="vi">Tên công ty</span><span data-l="en">Company name</span></div>
+          <ul>
+            <li data-l="vi">Mô tả thành tựu / trách nhiệm chính.</li>
+            <li data-l="en">Key achievement or responsibility.</li>
+          </ul>
+          <div class="tags"><span class="tag">Linux</span><span class="tag">Ansible</span></div>
+        </div>
+      </li>
+    </ol>
+
+    <h3 style="margin-top:2rem"><span data-l="vi">Kỹ năng</span><span data-l="en">Skills</span></h3>
+    <!-- TODO: chỉnh danh sách kỹ năng -->
+    <div class="tags">
+      <span class="tag">Kubernetes</span><span class="tag">Cluster API</span><span class="tag">Prometheus</span>
+      <span class="tag">Grafana</span><span class="tag">Ansible</span><span class="tag">Jenkins</span>
+      <span class="tag">Go</span><span class="tag">Python</span><span class="tag">Bash</span><span class="tag">Linux</span>
+    </div>
+    <!-- Có cv.pdf thì bỏ comment dòng dưới -->
+    <!-- <a class="more" href="cv.pdf"><span data-l="vi">Tải CV →</span><span data-l="en">Download CV →</span></a> -->
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    © <span id="year">2026</span> Lê Ngọc Thiện ·
+    <span data-l="vi">Làm bằng HTML &amp; CSS</span><span data-l="en">Built with HTML &amp; CSS</span>
+  </div>
+</footer>
+
+</body>
+</html>

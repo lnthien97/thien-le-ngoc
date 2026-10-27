@@ -1,0 +1,8 @@
+# Original photos — only the resized WebP files in blog/img/ are committed
+photos-src/
+
+# Python venv for tools/
+tools/.venv/
+__pycache__/
+
+.DS_Store

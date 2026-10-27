@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="vi" data-lang="vi"
+      data-title-vi="Xin chào — Lê Ngọc Thiện"
+      data-title-en="Hello — Thien Le Ngoc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xin chào — Lê Ngọc Thiện</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f766e'/><text x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>T</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/main.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="../">thien.</a>
+    <nav class="nav">
+      <a href="./">Blog</a>
+      <span class="toggles">
+        <button class="btn-icon" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+        <button class="btn-icon" id="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <article class="article">
+
+    <!-- ===== Tiếng Việt ===== -->
+    <div data-l="vi">
+      <h1>Xin chào — bài viết đầu tiên</h1>
+      <div class="meta"><time datetime="2026-10-27">27/10/2026</time> · 2 phút đọc</div>
+      <!-- Thẻ: phải khớp với data-tags của bài này trong blog/index.html -->
+      <div class="post-tags" style="margin:-1.25rem 0 2rem"><a class="tag" href="./?tag=tech">Kỹ thuật</a></div>
+
+      <p>Đây là bài viết mẫu. Để viết bài mới, copy file này, đổi tên (ví dụ <code>ten-bai-viet.html</code>), sửa nội dung, rồi thêm link vào <code>blog/index.html</code> và mục Blog ở trang chủ.</p>
+
+      <h2>Một ví dụ code</h2>
+      <pre><code>kubectl get nodes -o wide</code></pre>
+
+      <blockquote>Mỗi ngôn ngữ nằm trong một khối <code>data-l</code> riêng — có thể chỉ viết một ngôn ngữ nếu muốn.</blockquote>
+
+      <!--
+        Gallery ảnh: chạy tools/add_photos.py để tạo ảnh + đoạn HTML này (xem README).
+        Đặt ngoài khối data-l nếu muốn hiện ở cả hai ngôn ngữ.
+        Thêm class "wide" để mỗi ảnh chiếm cả dòng, giữ nguyên tỉ lệ.
+
+      <div class="gallery">
+        <figure><img src="img/my-post/01.jpg" alt="Mô tả ảnh" loading="lazy"><figcaption>Chú thích</figcaption></figure>
+        <figure><img src="img/my-post/02.jpg" alt="Mô tả ảnh" loading="lazy"></figure>
+      </div>
+      -->
+    </div>
+
+    <!-- ===== English ===== -->
+    <div data-l="en">
+      <h1>Hello — my first post</h1>
+      <div class="meta"><time datetime="2026-10-27">Oct 27, 2026</time> · 2 min read</div>
+      <div class="post-tags" style="margin:-1.25rem 0 2rem"><a class="tag" href="./?tag=tech">Tech</a></div>
+
+      <p>This is a sample post. To write a new one, copy this file, rename it (e.g. <code>my-post.html</code>), edit the content, then link it from <code>blog/index.html</code> and the Blog section on the home page.</p>
+
+      <h2>A code example</h2>
+      <pre><code>kubectl get nodes -o wide</code></pre>
+
+      <blockquote>Each language lives in its own <code>data-l</code> block, so you can write in just one if you prefer.</blockquote>
+    </div>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <a href="./">← <span data-l="vi">Tất cả bài viết</span><span data-l="en">All posts</span></a>
+  </div>
+</footer>
+
+</body>
+</html>
