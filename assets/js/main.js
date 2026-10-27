@@ -171,6 +171,138 @@
     }).catch(fail(el));
   }
 
+  // ----- Work notes (cong-viec/<system>/<doc>.md, listed in docs.json) -----
+  var DOC_TYPES = {
+    design: { vi: "Thiết kế", en: "Design" },
+    operations: { vi: "Vận hành", en: "Operations" },
+    challenges: { vi: "Khó khăn & bài học", en: "Challenges" },
+    changes: { vi: "Thay đổi", en: "Changes" },
+    incidents: { vi: "Sự cố", en: "Incidents" }
+  };
+  function docLabel(d) { return t(DOC_TYPES[d] || d); }
+
+  function systemList(systems, base) {
+    return systems.map(function (s) {
+      return '<div class="system"><h2>' + t(s.title) + "</h2>" + (s.summary ? "<p>" + t(s.summary) + "</p>" : "") +
+        '<div class="doc-links">' + s.docs.map(function (d) {
+          return '<a class="chip" href="' + base + "?d=" + encodeURIComponent(s.slug + "/" + d) + '">' + docLabel(d) + "</a>";
+        }).join("") + "</div></div>";
+    }).join("");
+  }
+
+  // ```mermaid blocks -> diagrams. Mermaid (~3 MB) is loaded only when a page has one.
+  var MERMAID_URL = "https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js";
+  var diagrams = [];
+  function drawDiagrams() {
+    if (!window.mermaid || !diagrams.length) return;
+    diagrams.forEach(function (d) {
+      d.removeAttribute("data-processed");
+      d.textContent = d.getAttribute("data-src");
+    });
+    // useMaxWidth: false keeps text readable; wide diagrams scroll horizontally instead of shrinking.
+    window.mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: currentTheme() === "dark" ? "dark" : "neutral",
+      flowchart: { useMaxWidth: false }, sequence: { useMaxWidth: false } });
+    window.mermaid.run({ nodes: diagrams }).catch(function (e) { console.error(e); });
+  }
+  function renderDiagrams(container) {
+    var blocks = container.querySelectorAll("pre > code.language-mermaid");
+    if (!blocks.length) return;
+    diagrams = Array.prototype.map.call(blocks, function (code) {
+      var div = document.createElement("div");
+      div.className = "mermaid";
+      div.setAttribute("data-src", code.textContent);
+      code.parentNode.replaceWith(div);
+      return div;
+    });
+    if (window.mermaid) return drawDiagrams();
+    var s = document.createElement("script");
+    s.src = MERMAID_URL;
+    s.onload = drawDiagrams;
+    document.head.appendChild(s);
+  }
+
+  // GitHub-style alerts: a blockquote starting with [!NOTE] / [!TIP] / [!WARNING] / [!IMPORTANT] / [!CAUTION].
+  var CALLOUTS = { NOTE: "Note", TIP: "Tip", IMPORTANT: "Important", WARNING: "Warning", CAUTION: "Caution" };
+  function renderCallouts(container) {
+    Array.prototype.forEach.call(container.querySelectorAll("blockquote"), function (bq) {
+      var p = bq.querySelector("p");
+      if (!p || bq.firstElementChild !== p) return;
+      var m = /^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?\s*/i.exec(p.innerHTML);
+      if (!m) return;
+      var kind = m[1].toUpperCase();
+      p.innerHTML = p.innerHTML.slice(m[0].length);
+      if (!p.innerHTML.trim()) p.remove();
+      bq.className = "callout callout-" + kind.toLowerCase();
+      bq.insertAdjacentHTML("afterbegin", '<div class="callout-title">' + CALLOUTS[kind] + "</div>");
+    });
+  }
+
+  function renderWorkPage(el) {
+    var intro = document.getElementById("work-intro");
+    var id = param("d");
+    getJSON("docs.json").then(function (systems) {
+      if (!id) {
+        el.innerHTML = systemList(systems, "");
+        return;
+      }
+      if (intro) intro.hidden = true;
+      var parts = id.split("/"), sys = systems.filter(function (s) { return s.slug === parts[0]; })[0];
+      if (!sys || sys.docs.indexOf(parts[1]) < 0 || !/^[a-z0-9-]+$/.test(parts[1])) {
+        el.innerHTML = '<p class="empty">' + bi("Không tìm thấy tài liệu.", "Document not found.") + "</p>";
+        return;
+      }
+      return fetch(encodeURIComponent(sys.slug) + "/" + parts[1] + ".md", { cache: "no-cache" }).then(function (r) {
+        if (!r.ok) throw new Error(id + ".md: " + r.status);
+        return r.text();
+      }).then(function (text) {
+        var html = window.marked ? window.marked.parse(text) : "<pre>" + esc(text) + "</pre>";
+        if (window.DOMPurify) html = window.DOMPurify.sanitize(html);
+        var tabs = sys.docs.map(function (d) {
+          return '<a href="?d=' + encodeURIComponent(sys.slug + "/" + d) + '"' + (d === parts[1] ? ' aria-current="page"' : "") + ">" + docLabel(d) + "</a>";
+        }).join("");
+        el.innerHTML = '<a class="back" href="./">← ' + bi("Công việc", "Work") + "</a>" +
+          '<div class="eyebrow">' + t(sys.title) + "</div>" +
+          '<nav class="doc-tabs">' + tabs + "</nav>" +
+          '<details class="toc" hidden><summary>' + bi("Mục lục", "On this page") + "</summary><ol></ol></details>" +
+          '<article class="doc" lang="en">' + html + "</article>";
+
+        // Heading anchors + table of contents from h2s.
+        var article = el.querySelector(".doc"), toc = el.querySelector(".toc"), ol = toc.querySelector("ol");
+        var used = {};
+        Array.prototype.forEach.call(article.querySelectorAll("h2, h3"), function (h) {
+          var slug = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "section";
+          while (used[slug]) slug += "-";
+          used[slug] = true;
+          h.id = slug;
+          if (h.tagName === "H2") ol.insertAdjacentHTML("beforeend", '<li><a href="#' + slug + '">' + esc(h.textContent) + "</a></li>");
+        });
+        if (ol.children.length > 2) toc.hidden = false;
+        Array.prototype.forEach.call(article.querySelectorAll("table"), function (tb) {
+          var wrap = document.createElement("div");
+          wrap.className = "table-wrap";
+          tb.parentNode.insertBefore(wrap, tb);
+          wrap.appendChild(tb);
+        });
+        renderCallouts(article);
+        renderDiagrams(article);
+        var words = text.replace(/```[\s\S]*?```/g, " ").split(/\s+/).length;
+        var mins = Math.max(1, Math.round(words / 220));
+        el.querySelector(".eyebrow").insertAdjacentHTML("beforeend",
+          ' <span class="reading-time">· ' + bi(mins + " phút đọc", mins + " min read") + "</span>");
+        var h1 = article.querySelector("h1");
+        if (h1) {
+          root.setAttribute("data-title-vi", h1.textContent + " — Lê Ngọc Thiên");
+          root.setAttribute("data-title-en", h1.textContent + " — Thien Le Ngoc");
+          setLang(root.getAttribute("data-lang"));
+        }
+        if (location.hash) {
+          var target = document.getElementById(location.hash.slice(1));
+          if (target) target.scrollIntoView();
+        } else window.scrollTo(0, 0);
+      });
+    }).catch(fail(el));
+  }
+
   // ----- Home -----
   function renderHome() {
     var photos = document.getElementById("home-photos");
@@ -249,6 +381,7 @@
       var next = currentTheme() === "dark" ? "light" : "dark";
       setTheme(next);
       save("theme", next);
+      drawDiagrams();
     });
     var year = document.getElementById("year");
     if (year) year.textContent = new Date().getFullYear();
@@ -259,5 +392,6 @@
     if (page === "home") renderHome();
     else if (page === "photos") renderPhotosPage(main);
     else if (page === "stories") renderStoriesPage(main);
+    else if (page === "work") renderWorkPage(main);
   });
 })();

@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "ceph",
+    "title": "Ceph",
+    "summary": {
+      "vi": "Vận hành nhiều cluster Ceph cỡ petabyte cho block, object và file storage.",
+      "en": "Running a fleet of multi-petabyte Ceph clusters for block, object and file storage."
+    },
+    "docs": ["design", "operations", "challenges", "changes", "incidents"]
+  },
+  {
+    "slug": "swift",
+    "title": "OpenStack Swift",
+    "summary": {
+      "vi": "Triển khai và vận hành object storage bằng OpenStack Swift.",
+      "en": "Deploying and operating object storage on OpenStack Swift."
+    },
+    "docs": ["design", "operations", "challenges", "changes", "incidents"]
+  },
+  {
+    "slug": "monitoring",
+    "title": { "vi": "Hệ thống giám sát", "en": "Monitoring platform" },
+    "summary": {
+      "vi": "Nền tảng giám sát metrics quy mô lớn chạy trên Kubernetes.",
+      "en": "A large-scale metrics and alerting platform running on Kubernetes."
+    },
+    "docs": ["design", "operations", "challenges", "changes", "incidents"]
+  }
+]

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="vi" data-lang="vi"
+      data-title-vi="Công việc — Lê Ngọc Thiên"
+      data-title-en="Work — Thien Le Ngoc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Công việc — Lê Ngọc Thiên</title>
+  <meta name="description" content="Field notes on running Ceph, Swift and a large monitoring platform: design, operations, challenges, changes and incidents.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f766e'/><text x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>T</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+</head>
+<body data-page="work">
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="../">thien.</a>
+    <nav class="nav">
+      <a href="../anh/"><span data-l="vi">Ảnh</span><span data-l="en">Photos</span></a>
+      <a href="../chuyen/"><span data-l="vi">Chuyện</span><span data-l="en">Stories</span></a>
+      <a href="./" aria-current="page"><span data-l="vi">Công việc</span><span data-l="en">Work</span></a>
+      <span class="toggles">
+        <button class="btn-icon" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+        <button class="btn-icon" id="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<div class="container page" id="work-intro" style="padding-bottom:0">
+  <div class="eyebrow"><span data-l="vi">Công việc</span><span data-l="en">Work</span></div>
+  <h1><span data-l="vi">Ghi chép kỹ thuật</span><span data-l="en">Field notes</span></h1>
+  <!-- TODO: chỉnh lại cho đúng. Repo public — không nêu tên công ty / sản phẩm / hệ thống nội bộ. -->
+  <p class="lead" data-l="vi">
+    Mình là kỹ sư hạ tầng cloud, làm về lưu trữ (Ceph, Swift) và hệ thống giám sát quy mô lớn.
+    Đây là những ghi chép về thiết kế, cách vận hành, khó khăn, thay đổi và sự cố mình đã gặp —
+    đã lược bỏ mọi thông tin nội bộ. Các tài liệu viết bằng tiếng Anh.
+  </p>
+  <p class="lead" data-l="en">
+    I'm a cloud infrastructure engineer working on storage (Ceph, Swift) and a large-scale monitoring platform.
+    These are my notes on design, operations, challenges, changes and incidents —
+    with all internal details removed.
+  </p>
+  <div class="links">
+    <a class="chip" href="https://github.com/lnthien97" target="_blank" rel="noopener">GitHub</a>
+    <!-- TODO: điền link thật hoặc xoá. Email nên dùng email cá nhân. -->
+    <a class="chip" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="chip" href="mailto:you@example.com">Email</a>
+  </div>
+</div>
+
+<!-- Danh sách hệ thống lấy từ docs.json; mỗi tài liệu là file <system>/<doc>.md -->
+<main class="container page" id="content"></main>
+
+<footer class="site-footer">
+  <div class="container">© <span id="year">2026</span> Lê Ngọc Thiên</div>
+</footer>
+
+</body>
+</html>

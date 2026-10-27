@@ -13,6 +13,9 @@ anh/<slug>/*.webp        Ảnh đã nén
 chuyen/index.html        Trang truyện (danh sách, hoặc 1 truyện qua ?s=<slug>)
 chuyen/stories.json      Danh sách truyện (sửa tay)
 chuyen/<slug>.md         Nội dung từng truyện
+cong-viec/index.html     Trang công việc (danh sách, hoặc 1 tài liệu qua ?d=<hệ-thống>/<loại>)
+cong-viec/docs.json      Danh sách hệ thống + tài liệu
+cong-viec/<hệ-thống>/*.md  Ghi chép kỹ thuật (tiếng Anh)
 assets/                  CSS + JS
 tools/add_photos.py      Script thêm ảnh
 ```
@@ -96,7 +99,15 @@ Cách viết trong file `.md`:
 
 ## Công việc
 
-Sửa trực tiếp mục `#work` trong `index.html`. Repo là public, nên không ghi tên hệ thống nội bộ, khách hàng hay thông tin công ty.
+Trang `cong-viec/` gồm đoạn giới thiệu và ghi chép kỹ thuật (tiếng Anh) cho từng hệ thống: Ceph, Swift, hệ thống giám sát. Mỗi hệ thống có 5 tài liệu: `design`, `operations`, `challenges`, `changes`, `incidents`.
+
+- Thêm hoặc sửa tài liệu: viết Markdown đầy đủ (bảng, code, sơ đồ ` ```mermaid `) vào `cong-viec/<hệ-thống>/<loại>.md`.
+- Thêm hệ thống mới: thêm một mục vào `cong-viec/docs.json`.
+
+**Trước khi commit bất kỳ tài liệu công việc nào**, kiểm tra để không lộ:
+- tên công ty, sản phẩm, khách hàng, người; IP, hostname, domain, mã site/region;
+- secret; số liệu quy mô chính xác (chỉ ghi làm tròn); ngày cụ thể (chỉ ghi theo quý);
+- tình trạng bảo mật hiện tại: lỗ hổng chưa vá, phiên bản có lỗi đang chạy, cấu hình yếu.
 
 ## Xem trên máy
 
